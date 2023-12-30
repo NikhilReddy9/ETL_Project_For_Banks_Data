@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
-import requests
 import sqlite3
 from datetime import datetime
 import warnings
+from security import safe_requests
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -19,7 +19,7 @@ rate_csv_path = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cl
 
 # Extract function
 def extract(url, table_attribs_initial):
-    page = requests.get(url).text
+    page = safe_requests.get(url).text
     data = BeautifulSoup(page, 'html.parser')
     tables = data.find_all('table')
     target_table = tables[0]
