@@ -19,7 +19,7 @@ rate_csv_path = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cl
 
 # Extract function
 def extract(url, table_attribs_initial):
-    page = requests.get(url).text
+    page = requests.get(url, timeout=60).text
     data = BeautifulSoup(page, 'html.parser')
     tables = data.find_all('table')
     target_table = tables[0]
